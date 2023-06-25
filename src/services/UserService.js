@@ -21,17 +21,16 @@ class UserService {
         return user
     }
 
-    deleteUser({id}) {
+    deleteUser(id) {
         User.destroy({ where: { id: id } }); 
 
-        return id 
+        return id; 
     }
 
-    async isExist({id}) {
+    async isExist(id) {
         try {
-            const isExist = await User.findOne({ where: {id} })
-
-            return isExist == null
+            const user = await User.findOne({ where: {id: id} })
+            return user !== null
         }
         catch(e) {
             console.error(e)

@@ -37,11 +37,12 @@ app.get('/api/user/getUserById', async (req, res) => {
 
 app.delete('/api/user/delete', async (req, res) => {
     try {
-        if(await userService.isExist({id: req.query.id})) {
-            await userService.deleteUser({id: req.query.id})
-            res.send({answer: `User ${req.query.id} was deleted`})
+        const id = req.body.id;
+        if(await userService.isExist(id)) {
+            await userService.deleteUser(id)
+            res.send({answer: `User ${id} was deleted`})
         }
-        else res.send({answer: `User ${req.query.id} not found`})
+        else res.send({answer: `User ${id} not found`})
     }
     catch(e) {
         console.error(e)
